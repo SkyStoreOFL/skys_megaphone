@@ -17,7 +17,7 @@ end)
 -- ====================|| FUNCTIONS || ==================== --
 function GetAnimType(isItem)
     local ped = PlayerPedId()
-    if IsPedInAnyVehicle(ped, false) and not isItem  then
+    if IsPedInAnyVehicle(ped, false) and not isItem then
         return Config.AnimConfiguration.invehicle
     else
         return Config.AnimConfiguration.outvehicle
@@ -45,12 +45,19 @@ function UseMegaphone(isItem)
         end
 
         prop = CreateObject(anim.prop.name, 0, 0, 0, true, true, true)
-        AttachEntityToEntity(prop, ped, anim.prop.bone, anim.prop.placement[1], anim.prop.placement[2], anim.prop.placement[3], anim.prop.placement[4], anim.prop.placement[5], anim.prop.placement[6], true, true, false, true, 1, true)
+        AttachEntityToEntity(prop, ped, GetPedBoneIndex(ped, anim.prop.bone), anim.prop.placement[1], anim.prop.placement[2], anim.prop.placement[3], anim.prop.placement[4], anim.prop.placement[5], anim.prop.placement[6], true, true, false, true, 1, true)
     end
 
     CreateThread(function ()
         while usingMegaphone do
-            TaskPlayAnim(ped, anim.dict, anim.anim, 8.0, -8.0, -1, 49, 0, false, false, false)
+            SetControlNormal(0, 249, 1.0)
+            SetControlNormal(1, 249, 1.0)
+            SetControlNormal(2, 249, 1.0)
+
+            if not IsEntityPlayingAnim(ped, anim.dict, anim.anim, 3) then
+                TaskPlayAnim(ped, anim.dict, anim.anim, 8.0, -8.0, -1, 49, 0, false, false, false)
+            end
+            Wait(0)
         end
     end)
 
@@ -86,7 +93,7 @@ AddEventHandler('skys_megaphone:client:SetMegaphone', function(isActive, source)
     else
         MumbleSetSubmixForServerId(source, -1)
         MumbleSetVolumeOverrideByServerId(source, -1.0)
-        CrearCustomRange()
+        ClearCustomRange()
         MumbleClearVoiceTargetPlayers(1.0)
     end
 end)

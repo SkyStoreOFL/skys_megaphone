@@ -4,6 +4,6 @@ OverrideRange = function ()
     exports['pma-voice']:overrideProximityRange(Config.Range, false)
 end
 
-CrearCustomRange = function ()
+ClearCustomRange = function ()
     exports['pma-voice']:clearProximityOverride()
 end

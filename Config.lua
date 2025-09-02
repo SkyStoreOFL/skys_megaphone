@@ -12,6 +12,12 @@ Config.Locale = 'es'
 -- Framework detection ('auto' for automatic detection, 'qb' for QBCore)
 Config.Framework = 'auto'
 
+-- Voice detection ('auto' for automatic detection, 'pma-voice' for PMA-Voice)
+Config.Voice = 'auto'
+
+-- Item name for the megaphone
+Config.ItemName = 'megaphone'
+
 -- Audio submix configuration for megaphone effects
 ---@type table<number, number>
 Config.SubmixData = {
@@ -36,13 +42,13 @@ Config.CanUseVehicleMegaphone = function ()
     local vehCoords = GetEntityCoords(vehicle)
     local playerCoords = GetEntityCoords(playerPed)
 
-    return (vehicleClass == 18 or vehicleClass == 15) and (IsPedInAnyVehicle(playerPed, false) or #(vehCoords - playerCoords) < 5.0)
+    return (vehicleClass == 18 or vehicleClass == 15) and (IsPedInAnyVehicle(playerPed, false) or #(vehCoords - playerCoords) < 3.0)
 end
 
 -- Animation configuration for different scenarios
 Config.AnimConfiguration = {
-    -- Animations when inside a vehicle
-    invehicle = {
+    -- Animations when outside a vehicle
+    outvehicle = {
         dict = 'anim@rifle_megaphone',          -- Animation dictionary
         anim = 'rifle_holding_megaphone',       -- Animation name
         prop = {
@@ -51,8 +57,8 @@ Config.AnimConfiguration = {
             placement = { 0.0480, 0.0190, 0.0160, -94.8944, -2.3093, -10.9030 } -- X, Y, Z, RX, RY, RZ
         }
     },
-    -- Animations when outside a vehicle
-    outvehicle = {
+    -- Animations when inside a vehicle
+    invehicle = {
         dict = 'random@arrests',                -- Animation dictionary
 	    anim = 'generic_radio_enter',           -- Animation name
         prop = {
@@ -68,6 +74,6 @@ Config.AnimConfiguration = {
 --- @param ... string[] Additional parameters for string formatting
 --- @return string The localized string or error message if locale doesn't exist
 function Locale(locale, ...)
-    if not Locales[locale] then return 'LOCALE ' .. locale .. ' DOES NOT EXIST' end
-    return string.format(Locales[locale], ...)
+    if not Locales[Config.Locale][locale] then return 'LOCALE ' .. locale .. ' DOES NOT EXIST' end
+    return string.format( Locales[Config.Locale][locale], ...)
 end
