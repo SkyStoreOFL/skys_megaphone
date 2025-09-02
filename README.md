@@ -52,6 +52,16 @@
 
 4. **Restart the server**
 
+5. **QBCore Setup (if using QBCore framework)**
+
+    Add the following item to your QBCore items configuration:
+
+    ```lua
+    megaphone                    = { name = 'megaphone', label = 'Megáfono', weight = 100, type = 'item', image = 'megaphone.png', unique = false, useable = true, shouldClose = true, description = 'Un megáfono para hacer anuncios' },
+    ```
+
+    The inventory image is located at `install/megaphone.png` - copy this file to your inventory images folder.
+
 ## ⚙️ Configuration
 
 The `Config.lua` file allows you to fully customize the megaphone behavior:
