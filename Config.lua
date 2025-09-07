@@ -7,7 +7,7 @@ Config.MegaphoneVolume = 0.90
 Config.Range = 30.0
 
 -- Language for the resource ('es' for Spanish, 'en' for English, etc.)
-Config.Locale = 'es'
+Config.Locale = 'en'
 
 -- Framework detection ('auto' for automatic detection, 'qb' for QBCore)
 Config.Framework = 'auto'

@@ -9,7 +9,7 @@
 
 <p align="center">
   <strong>🎯 A realistic and professional megaphone system for FiveM</strong><br>
-  Compatible with QBCore and PMA-Voice
+  Compatible with QBCore, ESX and PMA-Voice
 </p>
 
 ---
@@ -21,14 +21,14 @@
 -   🎭 **Detailed animations** - Different animations for inside and outside vehicle
 -   🔧 **Highly configurable** - Easy configuration of volume, effects and restrictions
 -   🌍 **Multi-language** - Localization system included (Spanish included)
--   🎯 **Automatic framework detection** - Compatible with QBCore
+    -   🎯 **Automatic framework detection** - Compatible with QBCore and ESX
 -   📱 **Optimized** - Clean and efficient code
 
 ## 📋 Requirements
 
 -   **FiveM Server** (Latest version recommended)
 -   **PMA-Voice** or compatible voice system
--   **QBCore Framework** (optional, automatic detection)
+-   **QBCore or ESX Framework** (optional, automatic detection)
 
 ## 🚀 Installation
 
@@ -52,15 +52,28 @@
 
 4. **Restart the server**
 
-5. **QBCore Setup (if using QBCore framework)**
+5. **Inventory Setup**
 
-    Add the following item to your QBCore items configuration:
+    1. **QBCore Setup (if using QBCore framework)**
 
-    ```lua
-    megaphone                    = { name = 'megaphone', label = 'Megáfono', weight = 100, type = 'item', image = 'megaphone.png', unique = false, useable = true, shouldClose = true, description = 'Un megáfono para hacer anuncios' },
-    ```
+        Add the following item to your QBCore items configuration:
 
-    The inventory image is located at `install/megaphone.png` - copy this file to your inventory images folder.
+        ```lua
+        megaphone = { name = 'megaphone', label = 'Megaphone', weight = 100, type = 'item', image = 'megaphone.png', unique = false, useable = true, shouldClose = true, description = 'A megaphone to make annoucements' },
+        ```
+
+        The inventory image is located at `install/megaphone.png` - copy this file to your inventory images folder.
+
+    2. **ESX Setup (if using ESX framework)**
+
+        Execute the following SQL query:
+
+        ```SQL
+        INSERT INTO `items` (`name`, `label`, `weight`) VALUES
+            ('megaphone', 'Megaphone', 1);
+        ```
+
+        The inventory image is located at `install/megaphone.png` - copy this file to your inventory images folder.
 
 ## ⚙️ Configuration
 
@@ -78,7 +91,7 @@ Config.Range = 30.0
 -- Language for the resource ('es' for Spanish, 'en' for English, etc.)
 Config.Locale = 'es'
 
--- Framework detection ('auto' for automatic detection, 'qb' for QBCore)
+-- Framework detection ('auto' for automatic detection, 'qb-core' for QBCore, 'es_extended' for ESX)
 Config.Framework = 'auto'
 ```
 
@@ -212,6 +225,7 @@ skys_megaphone/
 │   └── 📁 custom/           # Customizations
 │       ├── 📁 framework/    # Framework integrations
 │       │   └── 📄 qb.lua   # QBCore integration
+│       │   └── 📄 esx.lua  # ESX integration
 │       └── 📁 voice/        # Voice integrations
 │           └── 📄 pma.lua  # PMA-Voice integration
 ├── 📁 server/               # Server-side scripts
@@ -219,6 +233,7 @@ skys_megaphone/
 │   └── 📁 custom/          # Server customizations
 │       └── 📁 framework/   # Framework integrations
 │           └── 📄 qb.lua  # QBCore integration
+│       │   └── 📄 esx.lua # ESX integration
 └── 📁 locales/             # Language files
     └── 📄 es.lua          # Spanish translations
 ```
@@ -277,7 +292,7 @@ end
 
 ### Framework errors
 
--   ✅ Verify QBCore is installed (if you use it)
+-   ✅ Verify QBCore or ESX is installed (if you use it)
 -   ✅ Make sure the resource starts after the framework
 
 ## 🤝 Contributing

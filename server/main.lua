@@ -1,7 +1,5 @@
 
 RegisterNewItem(Config.ItemName, function(source)
-    local Player = QBCore.Functions.GetPlayer(source)
-    if not Player then return end
     TriggerClientEvent('skys_megaphone:client:ToggleMegaphone', source)
 end)
 

@@ -116,4 +116,3 @@ RegisterCommand('-megaphone', function()
 end, false)
 
 RegisterKeyMapping('+megaphone', Locale('command-description'), '', '')
-RegisterKeyMapping('-megaphone', Locale('command-description'), '', '')
